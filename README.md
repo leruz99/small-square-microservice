@@ -1,10 +1,8 @@
 # small-square-microservice
-# user-microservice-pragma
-
 <br />
 <div align="center">
-<h3>USER-MICROSERVICE</h3>
-  <p align="center">En este microservicio se encuantra la segunda historia de usuario que tiene los siguientes criterios de aceptacion</p>
+##<h3>small-square-microservice</h3>
+ <p align="center">En este microservicio se encuantra la segunda historia de usuario que tiene los siguientes criterios de aceptacion</p>
 </div>
   <ol start="numero"> ... </ol>
   <ol start="1">
