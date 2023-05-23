@@ -1,8 +1,6 @@
 package com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.adapter;
 
-import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.NameRestauranAlreadyExistExeception;
-import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.NitAlreadyExistException;
-import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.OwnerNotFoundException;
+import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.*;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.mapper.IRestaurantEntityMapper;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.repositories.IRestaurantRepository;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.client.UserRestClient;
@@ -11,14 +9,11 @@ import com.pragma.powerup.smallsquaremicroservice.configuration.Constants;
 import com.pragma.powerup.smallsquaremicroservice.domain.model.Restaurant;
 import com.pragma.powerup.smallsquaremicroservice.domain.spi.IRestaurantPersistencePort;
 import feign.FeignException;
-import jakarta.transaction.Transactional;
+import feign.RetryableException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import java.util.Collections;
 
 
-@Transactional
+
 public class RestaurantMysqlAdapter implements IRestaurantPersistencePort {
 
     private final IRestaurantRepository restaurantRepository;
@@ -39,21 +34,7 @@ public class RestaurantMysqlAdapter implements IRestaurantPersistencePort {
         if (restaurantRepository.findByNit(restaurant.getNit()).isPresent()){
             throw new NitAlreadyExistException();
         }
-        UserResponseDto userFromMcsvUser = null;
-        try {
-            userFromMcsvUser= userRestClient.getUserFromMcsvUser(restaurant.getIdOwner());
-        }catch (FeignException e){
-            ResponseEntity.status(HttpStatus.NOT_FOUND).
-                    body(Collections.singletonMap("mensaje", "No Owner found with the id provided " +
-                            " or communication error " +  e.getMessage()));
-
-        }
-        if (userFromMcsvUser.getIdRole() == Constants.OWNER_ROLE_ID){
-            restaurantRepository.save(restaurantEntityMapper.toRestaurantEntity(restaurant));
-        }else {
-            throw new OwnerNotFoundException();
-        }
-
+        restaurantRepository.save(restaurantEntityMapper.toRestaurantEntity(restaurant));
     }
     @Override
     public Restaurant getRestaurant(Long id) {

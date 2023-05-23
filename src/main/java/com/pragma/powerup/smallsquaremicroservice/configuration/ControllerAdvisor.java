@@ -1,6 +1,10 @@
 package com.pragma.powerup.smallsquaremicroservice.configuration;
 
 import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.*;
+import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.Category.CategoryAlreadyExistException;
+import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.Category.CategoryNotFoundException;
+import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.plate.PlateNotFoundException;
+import com.pragma.powerup.smallsquaremicroservice.adapter.driven.jpa.mysql.exceptions.plate.RestaurantNoExistException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
@@ -83,5 +87,39 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.NAME_ALREADY_EXIST_MESSAGE));
     }
+    @ExceptionHandler(RestaurantNoExistException.class)
+    public ResponseEntity<Map<String, String>> handleRestaurantNoExistExceptionExeception(
+            RestaurantNoExistException restaurantNoExistException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.RESTAURANT_NOT_FOUND));
+    }
+    @ExceptionHandler(CategoryAlreadyExistException.class)
+    public ResponseEntity<Map<String, String>> handleCategoryAlreadyExistException(
+            CategoryAlreadyExistException categoryAlreadyExist) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.CATEGORY_ALREADY_EXIST_MESSAGE));
+    }
+
+    @ExceptionHandler(CategoryNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleCategoryNotFoundException(
+            CategoryNotFoundException categoryNotFoundException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.CATEGORY_NOT_FOUND_MESSAGE));
+    }
+
+    @ExceptionHandler(PlateNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handlePlateNotFoundException(
+            PlateNotFoundException plateNotFoundException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.PLATE_NOT_FOUND_MESSAGE));
+    }
+
+    @ExceptionHandler(MicroserviceUserNoWorkingException.class)
+    public ResponseEntity<Map<String, String>> handleMicroserviceUserNoWorkingException(
+            MicroserviceUserNoWorkingException microserviceUserNoWorkingException) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.MICROSERVICE_NOT_WORKING));
+    }
+
 
 }

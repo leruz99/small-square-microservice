@@ -3,25 +3,22 @@ package com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.handlers
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.client.UserRestClient;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.dto.request.RestaurantRequestDto;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.dto.response.RestaurantResponseDto;
-import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.dto.response.UserResponseDto;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.handlers.IRestaurantHandler;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.mapper.IRestaurantRequestMapper;
-import com.pragma.powerup.smallsquaremicroservice.configuration.Constants;
 import com.pragma.powerup.smallsquaremicroservice.domain.api.IRestaurantServicePort;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
 
 @Service
 public class RestaurantHandlerImpl implements IRestaurantHandler {
     private final IRestaurantServicePort restaurantServicePort;
     private final IRestaurantRequestMapper restaurantRequestMapper;
-    private final UserRestClient userRestClient;
 
-    public RestaurantHandlerImpl(IRestaurantServicePort restaurantServicePort, IRestaurantRequestMapper restaurantRequestMapper, UserRestClient userRestClient) {
+
+    public RestaurantHandlerImpl(IRestaurantServicePort restaurantServicePort, IRestaurantRequestMapper restaurantRequestMapper) {
         this.restaurantServicePort = restaurantServicePort;
         this.restaurantRequestMapper = restaurantRequestMapper;
-        this.userRestClient = userRestClient;
+
     }
 
     @Override
