@@ -12,9 +12,12 @@
   <li> El número de intentos puede ser ilimitado.</li>
   <li> Una vez iniciada la sesión, se debe garantizar que con esa sesión iniciada, cada usuario tiene los permisos para realizar las acciones que le correspondan a su rol.</li>
   <li> Agregar validacion de autenticacion a los siguientes endpoint:
-    <li>-si creo un usuario propietario, validar que la persona que llamo el servicio sera usuario administrador.</li>
+    -si creo un usuario propietario, validar que la persona que llamo el servicio sera usuario administrador.
+   
     -si creo un usuario empleado, validar que la persona que llamo el servicio sea usuario propietario.
+   
     -si creo un restaurante, validar que la persona que llamo el servicio sea un usuario administrador.
+   
     -si creo/modifico un plato, validar que la persona que llamo el servicio sea un usuario propietario y sea el propietario del restaurante al cual se le va a asignar ese plato.</li>
 </ol>
 
