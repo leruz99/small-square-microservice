@@ -10,13 +10,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
 
-
-
     @Autowired
     private TokenInterceptor tokenInterceptor;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(tokenInterceptor).addPathPatterns("/plate/**");
+        registry.addInterceptor(tokenInterceptor)
+                .addPathPatterns("/plate/**")
+                .addPathPatterns("/restaurant/**");
     }
 }

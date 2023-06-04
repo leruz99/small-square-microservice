@@ -7,8 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +18,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/restaurant")
+@SecurityRequirement(name = "jwt")
 public class RestaurantController {
 
     public final IRestaurantHandler restaurantHandler;

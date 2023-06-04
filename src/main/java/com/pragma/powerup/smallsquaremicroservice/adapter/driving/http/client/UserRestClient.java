@@ -1,6 +1,6 @@
 package com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.client;
 import com.pragma.powerup.smallsquaremicroservice.adapter.driving.http.dto.response.UserResponseDto;
-import com.pragma.powerup.smallsquaremicroservice.configuration.security.FeignClientConfig;
+import com.pragma.powerup.smallsquaremicroservice.configuration.security.FeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 
-@FeignClient(name = "user-microservice", url = "localhost:8090", configuration = FeignClientConfig.class)
+@FeignClient(name = "user-microservice", url = "localhost:8090", configuration = FeignConfig.class)
 public interface UserRestClient {
     @GetMapping("/user/owner/{id}")
     UserResponseDto getUserFromMsUser(@PathVariable Long id);

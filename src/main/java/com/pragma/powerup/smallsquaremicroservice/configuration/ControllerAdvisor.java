@@ -120,6 +120,12 @@ public class ControllerAdvisor {
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
                 .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.MICROSERVICE_NOT_WORKING));
     }
+    @ExceptionHandler(UserNotRoleOwnerExceptio.class)
+    public ResponseEntity<Map<String, String>> handleUserNotRoleOwnerExceptio(
+            UserNotRoleOwnerExceptio userNotRoleOwnerExceptio) {
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(Collections.singletonMap(Constants.RESPONSE_ERROR_MESSAGE_KEY, Constants.USER_NOT_ROLE_OWNER));
+    }
 
 
 }

@@ -10,6 +10,7 @@ public class Constants {
     public static final Long OWNER_ROLE_ID = 2L;
     public static final Long PROVIDER_ROLE_ID = 3L;
     public static final int MAX_PAGE_SIZE = 2;
+    public static final String USER_NOT_ROLE_OWNER = "User is not a Owner";
     public static final String RESPONSE_MESSAGE_KEY = "message";
     public static final String PLATE_CREATED_MESSAGE = "Plate created successfully";
     public static final String CATEGORY_CREATED_MESSAGE = "Category created successfully";
